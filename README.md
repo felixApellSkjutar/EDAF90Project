@@ -4,6 +4,10 @@ EDAF90 Project - The Svelte Manifesto
 
 Developers in every nation, take to arms, kill your react suppressor
 
+![Gullig](/images/gullig.png?raw=true "Kul")
+
+![Svelte](/images/svelte.png?raw=true "Svelte")
+
 # create-svelte
 
 Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
