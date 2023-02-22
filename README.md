@@ -18,6 +18,8 @@ yarn dev
 
 This project uses TS, since JS sucks ass.
 
+[Tailwind](https://tailwindcss.com/) is used for CSS, [flowbite-svelte](https://flowbite-svelte.com/) is our chosen component library.
+
 ## Adding dependencies
 
 Since the project uses yarn instead of npm, new dependencies are added using `yarn add <package-name>`

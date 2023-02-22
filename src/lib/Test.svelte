@@ -2,4 +2,4 @@
 	export let name: string;
 </script>
 
-<h1>Welcome to SvelteKit, {name}</h1>
+<h1>Hej {name}</h1>
