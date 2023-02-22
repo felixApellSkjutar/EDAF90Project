@@ -2,4 +2,4 @@
 	export let name: string;
 </script>
 
-<h1>Hej {name}</h1>
+<h1 class="dark:text-white">Hej {name}</h1>
