@@ -1,26 +1,32 @@
 <script lang="ts">
+	import EventCard from '$lib/EventCard.svelte';
 	import EventPopup from '$lib/EventPopup.svelte';
 	import { getDay } from '$lib/fetch';
-	import Test from '$lib/Test.svelte';
-	import { Button, DarkMode, Modal } from 'flowbite-svelte';
+	import type { Event } from '$lib/types';
+	import { Button, Card, DarkMode, Modal, Spinner } from 'flowbite-svelte';
 
-	const exampleList = async () => {
+	const exampleList = async (): Promise<Event[]> => {
 		const a = await getDay(new Date('2023-02-23'));
+		console.log(a[0]);
 		return a;
 	};
 
 	let open = false;
 </script>
 
-<div class="border-2 w-screen-sm">
-	<DarkMode class="dark:text-white" />
-	<Test name={'Joel'} />
-	<p class="dark:text-white">
-		Visit <a class="font-bold underline" href="https://kit.svelte.dev">kit.svelte.dev</a> to read the
-		documentation
-	</p>
-	<div class="p-8">
-		<Button gradient color="cyanToBlue">Snygg knapp</Button>
+<div class="flex justify-center">
+	<div class="max-w-screen-lg">
+		<DarkMode class="dark:text-white" />
+		<div class="grid gap-4 grid-cols-3 auto-cols-auto">
+			<!-- <div class="w-60 h-72 bg-green-200 " /> -->
+			{#await exampleList()}
+				<Spinner />
+			{:then list}
+				{#each list as event}
+					<EventCard {event} />
+				{/each}
+			{/await}
+		</div>
 	</div>
 </div>
 
