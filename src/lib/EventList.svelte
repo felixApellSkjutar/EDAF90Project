@@ -1,37 +1,37 @@
 <script lang="ts">
-	import { Spinner } from 'flowbite-svelte';
 	import EventCard from './EventCard.svelte';
 	import { getDay } from './fetch';
 	import type { Event } from './types';
 
 	export let date: Date;
+	export let loading: boolean;
 
 	const exampleList = async (): Promise<Event[]> => {
+		loading = true;
 		const a = await getDay(date);
+		loading = false;
 		return a;
 	};
+	const weekDays = ['Mån', 'Tis', 'Ons', 'Tors', 'Fre', 'Lör', 'Sön'];
 
 	const dayString = () => {
 		let day = new Date();
-		console.log(day.toDateString(), date.toDateString());
 		if (date.toDateString() === day.toDateString()) {
-			return 'Today';
+			return 'Idag';
 		}
 		day.setDate(day.getDate() + 1);
 		if (date.toDateString() === day.toDateString()) {
-			return 'Tomorrow';
+			return 'Imorgon';
 		}
-		return date.getDate() + '/' + (date.getMonth() + 1);
+		return `${weekDays[date.getDay()]} ${date.getDate()}/${date.getMonth() + 1}`;
 	};
 </script>
 
-<p class="text-4xl font-extrabold mb-3 dark:text-white mt-10">{dayString()}</p>
-<div class="grid gap-4 grid-cols-3 auto-cols-auto">
-	{#await exampleList()}
-		<Spinner />
-	{:then list}
+{#await exampleList() then list}
+	<p class="text-4xl font-extrabold mb-3 dark:text-white mt-10">{dayString()}</p>
+	<div class="grid gap-4 grid-cols-3 auto-cols-auto">
 		{#each list as event}
 			<EventCard {event} />
 		{/each}
-	{/await}
-</div>
+	</div>
+{/await}

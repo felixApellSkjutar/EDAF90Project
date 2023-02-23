@@ -15,11 +15,10 @@
 	};
 
 	let modalVisible = false;
-	
 </script>
 
-<button on:click={() => modalVisible = !modalVisible}>
-	<Card class="hover:scale-105 transition-transform" img={event.image_url}>
+<button on:click={() => (modalVisible = !modalVisible)}>
+	<Card class="hover:scale-105 transition-transform text-left h-full" img={event.image_url}>
 		<div class="flex justify-between m-0">
 			<p class="font-light">{getTime(start)} - {getTime(end)}</p>
 			<p>hjärta</p>
@@ -30,4 +29,4 @@
 	</Card>
 </button>
 
-<EventPopup event={event} visible={modalVisible} toggle={() => modalVisible = !modalVisible}/>
+<EventPopup {event} visible={modalVisible} toggle={() => (modalVisible = !modalVisible)} />
