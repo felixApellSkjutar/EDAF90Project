@@ -1,22 +1,22 @@
 <script lang="ts">
-	import {  Modal } from 'flowbite-svelte'
-	import {Button, ButtonGroup} from 'flowbite-svelte'
-	import Heart from './heartOutline.svelte'
-	import FilledHeart from './heartFilled.svelte'
+	import { Modal } from 'flowbite-svelte';
+	import { Button, ButtonGroup } from 'flowbite-svelte';
+	import Heart from './heartOutline.svelte';
+	import FilledHeart from './heartFilled.svelte';
 	import type { Event } from './types';
 
-	let defaultModal = true;
+	let defaultModal = false;
 
-	let h = Heart
+	let h = Heart;
 	export let event: Event;
 	export let visible: boolean;
 	export let toggle: Function;
-	const description= event['description'];
+	const description = event['description'];
 	const summary = event['summary'];
 
 	const organizer = event['organizer'];
-	const {name, email} = event.organizer;
-	const {start, end, last_updated} = event.date;
+	const { name, email } = event.organizer;
+	const { start, end, last_updated } = event.date;
 	const location = event.location;
 	let b = true;
 	function likeEvent() {
@@ -24,25 +24,27 @@
 	}
 </script>
 
-
-<Modal title={`${name}: ${summary}`} bind:open={visible} on:hide={() => visible = toggle()} autoclose>
-
-
-	  <svelte:fragment slot='default'>
+<Modal
+	title={`${name}: ${summary}`}
+	bind:open={visible}
+	on:hide={() => (visible = toggle())}
+	autoclose
+>
+	<svelte:fragment slot="default">
 		BALLABALLABALAL
 		<p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
 			{description}
-		  </p>
+		</p>
 
-		  <p>
+		<p>
 			start: {start}, end: {end}, location: {location}
-		  </p>
-	  </svelte:fragment>
-	  <svelte:fragment slot='footer'>
+		</p>
+	</svelte:fragment>
+	<svelte:fragment slot="footer">
 		<ButtonGroup class="space-x-px">
 			<Button gradient color="purpleToBlue">Book</Button>
-			<Button gradient color="greenToBlue"> <a href={`mailto:${email}`}> email </a></Button>
-			<Button class="align-end" on:click={likeEvent} gradient color= "cyanToBlue">			
+			<Button gradient color="greenToBlue"><a href={`mailto:${email}`}> email </a></Button>
+			<Button class="align-end" on:click={likeEvent} gradient color="cyanToBlue">
 				{#if b}
 					<Heart />
 				{:else}
@@ -57,8 +59,5 @@
 				<FilledHeart />
 			{/if}
 		</button> -->
-		
-	  </svelte:fragment>
-
+	</svelte:fragment>
 </Modal>
-
