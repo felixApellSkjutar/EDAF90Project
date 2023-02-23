@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { Card } from 'flowbite-svelte';
+	import EventPopup from './EventPopup.svelte';
 	import type { Event } from './types';
 
 	export let event: Event;
@@ -12,14 +13,21 @@
 			.toString()
 			.padStart(2, '0')}`;
 	};
+
+	let modalVisible = false;
+	
 </script>
 
-<Card class="hover:scale-105 transition-transform" img={event.image_url}>
-	<div class="flex justify-between m-0">
-		<p class="font-light">{getTime(start)} - {getTime(end)}</p>
-		<p>hjärta</p>
-	</div>
-	<p class="text-lg font-bold m-0">{event.summary}</p>
-	<p class="italic font-light">{event.organizer.name}</p>
-	<p />
-</Card>
+<button on:click={() => modalVisible = !modalVisible}>
+	<Card class="hover:scale-105 transition-transform" img={event.image_url}>
+		<div class="flex justify-between m-0">
+			<p class="font-light">{getTime(start)} - {getTime(end)}</p>
+			<p>hjärta</p>
+		</div>
+		<p class="text-lg font-bold m-0">{event.summary}</p>
+		<p class="italic font-light">{event.organizer.name}</p>
+		<p />
+	</Card>
+</button>
+
+<EventPopup event={event} visible={modalVisible} toggle={() => modalVisible = !modalVisible}/>

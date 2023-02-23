@@ -3,32 +3,29 @@
 	import {Button, ButtonGroup} from 'flowbite-svelte'
 	import Heart from './heartOutline.svelte'
 	import FilledHeart from './heartFilled.svelte'
+	import type { Event } from './types';
 
 	let defaultModal = true;
 
 	let h = Heart
-	export let event: any;
-
-	console.log(Object.keys(event).map((key) => {
-			return `${key}: ${event[key]}`;
-		}).reduce((prev, next) => `${prev} \n${next}`,'' ));
-
+	export let event: Event;
+	export let visible: boolean;
+	export let toggle: Function;
 	const description= event['description'];
 	const summary = event['summary'];
 
 	const organizer = event['organizer'];
-	const email = organizer['email'];
-	console.log(event['date']);
-	const {start, end, updated} = event['date'];
-	const location = event['location']
-	let b = true
+	const {name, email} = event.organizer;
+	const {start, end, last_updated} = event.date;
+	const location = event.location;
+	let b = true;
 	function likeEvent() {
 		b = !b;
 	}
 </script>
 
 
-<Modal title={`${organizer['name']}: ${summary}`} bind:open={defaultModal} autoclose>
+<Modal title={`${name}: ${summary}`} bind:open={visible} on:hide={() => visible = toggle()} autoclose>
 
 
 	  <svelte:fragment slot='default'>
@@ -45,7 +42,7 @@
 		<ButtonGroup class="space-x-px">
 			<Button gradient color="purpleToBlue">Book</Button>
 			<Button gradient color="greenToBlue"> <a href={`mailto:${email}`}> email </a></Button>
-			<Button on:click={likeEvent} gradient color= "cyanToBlue">			
+			<Button class="align-end" on:click={likeEvent} gradient color= "cyanToBlue">			
 				{#if b}
 					<Heart />
 				{:else}
