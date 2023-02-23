@@ -32,8 +32,8 @@
 
 <button on:click={() => (open = true)}>Show modal</button>
 
-<Modal bind:open>
-	{#await exampleList() then list}
-		<EventPopup event={list[0]} />
-	{/await}
-</Modal>
+
+{#await exampleList() then list}
+	<EventPopup event={list[0]} />
+{/await}
+
