@@ -30,7 +30,6 @@
 	title={`${name}: ${summary}`}
 	bind:open={visible}
 	on:hide={() => (visible = toggle())}
-	autoclose
 >
 	<svelte:fragment slot="default">
 		BALLABALLABALAL
