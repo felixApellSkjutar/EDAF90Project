@@ -10,7 +10,19 @@ Developers in every nation, take to arms, kill your react suppressor
 
 ## Developing
 
-Once you've installed dependencies with `yarn`, start a development server:
+If you don't already have yarn, you need to install it:
+
+```
+sudo npm install --global yarn
+```
+
+Then install dependencies:
+
+```
+yarn
+```
+
+A development server can then be started through:
 
 ```bash
 yarn dev
@@ -29,7 +41,7 @@ Since the project uses yarn instead of npm, new dependencies are added using `ya
 To create a production version of your app:
 
 ```bash
-npm run build
+yarn build
 ```
 
 You can preview the production build with `yarn preview`.
